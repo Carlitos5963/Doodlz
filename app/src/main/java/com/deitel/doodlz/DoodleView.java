@@ -118,7 +118,6 @@ public class DoodleView extends View {
       // determine whether touch started, ended or is moving
       if (action == MotionEvent.ACTION_DOWN ||
          action == MotionEvent.ACTION_POINTER_DOWN) {
-            setLineWidth((int) (event.getPressure() * 10));
             touchStarted(event.getX(actionIndex), event.getY(actionIndex),
                     event.getPointerId(actionIndex));
 
@@ -166,6 +165,9 @@ public class DoodleView extends View {
          // get the pointer ID and pointer index
          int pointerID = event.getPointerId(i);
          int pointerIndex = event.findPointerIndex(pointerID);
+         //Use more finger to get wider lines
+         double pressure = event.getSize() * 300.00;
+         setLineWidth((int)pressure);
 
          // if there is a path associated with the pointer
          if (pathMap.containsKey(pointerID)) {
